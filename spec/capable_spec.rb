@@ -54,23 +54,7 @@ describe Capable do
       expect(non_cached_user.has_ability?(admin_ability.ability)).to eq false
     end
 
-    it 'Test Acts As Capability Expiration Logic' do
-      user.assign_ability(admin_ability)
-      user.assign_ability(pro_ability, true, Time.now)
-      user.reload
-
-      expect(user.has_ability?(admin_ability)).to eq true
-      expect(user.has_ability?(pro_ability)).to eq true
-
-      # Test expiration
-      Capability.expire_capabilities(Time.now+2)
-      user.reload
-
-      expect(user.has_ability?(admin_ability)).to eq true
-      expect(user.has_ability?(pro_ability)).to eq false
-    end
-
-    it 'Test Acts As Capability Renewer' do
+    it 'Test Acts As Capability Renewer Instance Methods' do
 
       # Test create_capabilities works
       renewer.create_capabilities(user, [pro_ability, admin_ability], true, Time.now+4)
@@ -104,6 +88,23 @@ describe Capable do
       user.reload
 
       expect(user.has_ability?(admin_ability)).to eq false
+      expect(user.has_ability?(pro_ability)).to eq false
+    end
+
+
+    it 'Test Acts As Capability Expiration Logic' do
+      user.assign_ability(admin_ability)
+      user.assign_ability(pro_ability, true, Time.now)
+      user.reload
+
+      expect(user.has_ability?(admin_ability)).to eq true
+      expect(user.has_ability?(pro_ability)).to eq true
+
+      # Test expiration
+      Capability.expire_capabilities(Time.now+2)
+      user.reload
+
+      expect(user.has_ability?(admin_ability)).to eq true
       expect(user.has_ability?(pro_ability)).to eq false
     end
 

@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Capable::VERSION
   spec.authors       = ["Eric Chapman"]
   spec.email         = ["contact@ericjchapman.com"]
-  spec.summary       = %q{GEM that wil allow 'roles' to be assigned to existing objects by creating 'abilities' and assigning them to objects as capabilities.}
+  spec.summary       = %q{Gem that will allow 'abilities' to be assigned to 'capable' objects that can be independantly expired and renewed.}
   spec.description   = %q{}
   spec.homepage      = ""
   spec.license       = "MIT"
